@@ -1,0 +1,24 @@
+/**
+Time complexity O(n)
+Space coplexity O(n)
+
+First I create a Hash Map then I loop through the integer array. If the target value minus the number at the index is in the map then we return a int array with the current index
+and map.get(target-nums[i]) which is the index of target-nums[i]. If the target value minus the number at the index is not in the map then we add the number at the current index 
+and the index into the map
+*/
+
+class Solution{
+    public int[] twoSum(int[] nums, int target){
+        Map<Integer,Integer> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++){
+            if(map.get(target-nums[i]) != null)
+                return new int[] {i, map.get(target-nums[i])};
+            else
+                map.put(nums[i],i);
+        }
+        return new int[] {0,0};
+      
+     }
+        
+}
