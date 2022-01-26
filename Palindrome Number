@@ -1,0 +1,34 @@
+/**
+All numbers between 0 and 9 inclusive are palindromes, so we start by checking if 0<=x<10 if so return true, if not we continue. We know any number that ends in a 0 is not a 
+palindrome so we check if x % 10 = 0, we also check if the x < 0 because any number less than 0 is not a palindrome, if either are true we return false. Lastly, if neither if 
+statements are true we a temp and reverse variables. We set temp = to the last digit in x, then remove that digit from x. We then multiply the current reverse by 10 so that we can 
+add temp to the end of rev instead of adding it as addition. We do this until reverse is greater than x. We then check if reverse = x or if x has odd digits, we check if reverse ÷
+10 = x. If so we return true and x is a palindrome, if not we return false and x is not a palindrome.
+
+Time Complexity: O(n)
+Space complexity: O(1)
+*/
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x >= 0 && x < 10)
+            return true;
+        
+        else if(x % 10 == 0 || x < 0)
+            return false;
+        
+        else{
+            int temp, rev = 0;
+            while(rev < x){
+                temp = x % 10;
+                x /= 10;
+                rev = (rev*10) + temp;
+             }
+            
+            if(rev == x || rev/10 == x)
+                return true;
+            else 
+                return false;
+        }
+        
+    }
+}
