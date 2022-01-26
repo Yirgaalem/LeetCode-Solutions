@@ -1,0 +1,43 @@
+/**
+Using a HashMap, I add each Roman numeral and it's number equivalent to the map. I then loop through the string character by character. I check the following conditions:
+  - I can be placed before V (5) and X (10) to make 4 and 9. 
+  - X can be placed before L (50) and C (100) to make 40 and 90. 
+  - C can be placed before D (500) and M (1000) to make 400 and 900.
+ If any of these are true than I remove 2, 20 and 200 in respective order. I subtract 2 if there exists a IV or IX because 5-1 = 4 = IV and 10-1=9=IX. Same for XL, XC and 
+ CD, CM. I subtract 2 times the value of I, X and C because at the end, if I must add the value of the current character to the result for cases such as s = "III". Here, none 
+ of the conditions are met and I must add 1 during each iteration.
+ 
+Time Complexity: O(n)
+Space Complexity: O(n) ?? maybe
+*/
+class Solution {
+    public static int romanToInt(String s){
+        Map<Character,Integer> map = new HashMap<>();
+        map.put('I', 1); map.put('V', 5); map.put('X', 10); map.put('L', 50); map.put('C', 100); map.put('D', 500); map.put('M', 1000);
+        int result = 0;
+        
+        for(int i = 0; i < s.length(); i++){
+            
+            char curr = s.charAt(i);
+            
+            if(curr == 'I' && (i+1) < s.length()){
+                if(s.charAt(i+1) == 'V' || s.charAt(i+1) == 'X')
+                    result -= 2;
+            }
+            
+            else if(curr == 'X' && (i+1) < s.length()){
+                if(s.charAt(i+1) == 'L' || s.charAt(i+1) == 'C')
+                    result -= 20;
+            }
+            
+            else if(curr == 'C' && (i+1) < s.length()){
+                if(s.charAt(i+1) == 'D' || s.charAt(i+1) == 'M')
+                    result -= 200;
+            }
+            
+            result += map.get(curr);
+
+        }
+        return result;
+    }
+}
