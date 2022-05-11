@@ -11,33 +11,44 @@ Time Complexity: O(n)
 Space Complexity: O(n) ?? maybe
 */
 class Solution {
-    public static int romanToInt(String s){
+    public int romanToInt(String s) {
+        
+        //A hashmap that will store the roman numeral and its corresponding value
         Map<Character,Integer> map = new HashMap<>();
         map.put('I', 1); map.put('V', 5); map.put('X', 10); map.put('L', 50); map.put('C', 100); map.put('D', 500); map.put('M', 1000);
-        int result = 0;
         
+        int value = 0;
+        
+    
         for(int i = 0; i < s.length(); i++){
+            char curr = s.charAt(i);//current roman numeral
             
-            char curr = s.charAt(i);
-            
-            if(curr == 'I' && (i+1) < s.length()){
-                if(s.charAt(i+1) == 'V' || s.charAt(i+1) == 'X')
-                    result -= 2;
-            }
-            
-            else if(curr == 'X' && (i+1) < s.length()){
-                if(s.charAt(i+1) == 'L' || s.charAt(i+1) == 'C')
-                    result -= 20;
-            }
-            
-            else if(curr == 'C' && (i+1) < s.length()){
-                if(s.charAt(i+1) == 'D' || s.charAt(i+1) == 'M')
-                    result -= 200;
-            }
-            
-            result += map.get(curr);
+            //while there exists 1 more on top of the current index in the string we continue
+            if(s.length() > (i+1)){
+                
+                //the next roman numeral  
+                char next = s.charAt(i+1);
+                
+                //Checks if the current roman numeral is 'I' and if the next is either 'V' or 'X'. If so subtract 2. We do this because if we have "IV", we start with 0, subtract 2 and get -2. Then we eventually add the 1 from 'I', resulting in -1 and then when 'V' comes around we add 5 and we get 4. The proper amount. The same goes for 'X' with 'L' and 'C', and 'C' with 'D' and 'M'.
+                if(curr == 'I'){
+                    if(next == 'V' || next == 'X')
+                        value-=2;
+                }
 
+                else if(curr == 'X'){
+                    if(next == 'L' || next == 'C')
+                        value-=20;
+                }
+                else if(curr == 'C'){
+                     if(next == 'D' || next == 'M')
+                            value-=200;
+                }
+            }
+            
+            //Find the corresponding value with the current roman numeral from the hash map and add it to the total value. 
+            value+=map.get(curr);
+                   
         }
-        return result;
+        return value;
     }
 }
