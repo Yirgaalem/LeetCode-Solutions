@@ -5,30 +5,39 @@ statements are true we a temp and reverse variables. We set temp = to the last d
 add temp to the end of rev instead of adding it as addition. We do this until reverse is greater than x. We then check if reverse = x or if x has odd digits, we check if reverse ÷
 10 = x. If so we return true and x is a palindrome, if not we return false and x is not a palindrome.
 
-Time Complexity: O(n)
-Space complexity: O(1)
+Time complexity O(n)
+Space complexity O(1)
 */
 class Solution {
     public boolean isPalindrome(int x) {
+        
+        //If statements need to be checked in this order.
+        
+        //checks if the int 'x' is a single digit number. Single digits are palindromes
         if(x >= 0 && x < 10)
             return true;
-        
-        else if(x % 10 == 0 || x < 0)
-            return false;
-        
-        else{
-            int temp, rev = 0;
-            while(rev < x){
-                temp = x % 10;
-                x /= 10;
-                rev = (rev*10) + temp;
-             }
             
-            if(rev == x || rev/10 == x)
-                return true;
-            else 
-                return false;
+        //this checks if the integer 'x' ends in a 0, if it does, then it cannot be a palindrome. Or if x is negative.
+        else if(x % 10 == 0 || x < 0)
+            return false; 
+        
+      
+        int y = 0;
+        while(y < x){    
+            y *= 10;
+            y += x%10;
+            x /=10;
         }
+        
+        if(x == y)
+            return true;
+        else{
+            if(x == y/10)
+                return true;
+            else if(x/10 == y)
+                return true;
+        }
+        return false;
         
     }
 }
