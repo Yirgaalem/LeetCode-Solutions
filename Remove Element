@@ -1,0 +1,24 @@
+Authour: Nahor Yirgaalem
+Date: July 14th, 2022
+Time complexity: O(n)
+Space complexity: O(1)
+
+/**
+Creates a count that counts the number of integers in the nums array that are not equal to the passed value. Makes sure that all values that matach the value passed are towards the end of the array
+*/
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int k = 0;
+
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != val){
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+
+        return k;
+    }
+}
+
