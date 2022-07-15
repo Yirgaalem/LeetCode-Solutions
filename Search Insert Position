@@ -1,0 +1,38 @@
+Authour: Nahor Yirgaalem
+Date: July 13th, 2022
+Time complexity: O(log(n))
+Space complexity: O(1)
+
+/**
+Used a binary search algorithm. Using left and right pointers, we would calculate the middle of the array, compare its value to the target. If it was larger than the target
+we update the left pointer to be equal to 1 higher then the middle (since the middle is is less than the target we know it doesnt need to be in the next array). If it the middle
+value is less than the target, we update the right opinter to be 1 less than the middle (since we know the current middle is larger than the target we do not need 
+to have it in the next array). If we have a middle that matches the target, we return that index (middle), if not, we return the left pointer since the left pointer, is
+where the target value would go.
+*/
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        return binarySearch(nums,target);
+    }
+    
+    public int binarySearch(int[] nums, int target){
+        int left = 0;
+        int right = nums.length-1;
+        
+        while(left <= right){
+            int middle = (right+left)/2;
+            if(nums[middle] == target)
+                return middle;
+            
+            else if(nums[middle] < target)
+                left = middle + 1;
+            
+            else 
+                right = middle - 1;
+            
+        }
+        
+        return left;
+    }
+}
