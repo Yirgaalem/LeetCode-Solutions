@@ -1,7 +1,7 @@
 Authour: Nahor Yirgaalem
 Date: July 17th, 2022
 Time complexity: O(n)
-Space complexity: O(1)
+Space complexity: O(n)
 /**
 An algorithm that finds the first non repeating character in a string. String can be of anysize, only lowercase letters allowed
 Example: aaabcccdeeef, first non repeating character is b, thus it will return b
