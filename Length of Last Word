@@ -1,0 +1,33 @@
+Authour: Nahor Yirgaalem
+Date: July 13th, 2022
+Time complexity: O(n)
+Space complexity: O(1)
+
+/**
+An algorithm that finds the length of the last word in the string, not including whitespaces
+*/
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int length = 0;
+
+        for(int i = s.length()-1; i >= 0; i--){
+            if(isLetter(s.charAt(i)))
+                length++;
+            else if(length != 0)
+                break;
+        }
+
+        
+        return length;
+    }
+    
+    public boolean isLetter(char letter){
+        int ascii = letter;
+        
+        if((ascii > 64 && ascii < 91) || (ascii > 96 && ascii < 123))
+            return true;
+        
+        return false;
+    }
+}
